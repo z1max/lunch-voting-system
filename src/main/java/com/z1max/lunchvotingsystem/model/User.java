@@ -12,7 +12,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
 
     @NotBlank
@@ -33,6 +33,10 @@ public class User extends AbstractNamedEntity {
     private Set<Role> roles;
 
     public User(){}
+
+    public User(Integer id,String name, String email, String password, Role role, Role... roles){
+        this(id, name, email, password, EnumSet.of(role, roles));
+    }
 
     public User(Integer id, String name, String email, String password, Collection<Role> roles) {
         super(id, name);
