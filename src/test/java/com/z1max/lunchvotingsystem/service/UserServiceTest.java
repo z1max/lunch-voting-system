@@ -1,36 +1,17 @@
 package com.z1max.lunchvotingsystem.service;
 
-import com.z1max.lunchvotingsystem.config.AppConfig;
-import com.z1max.lunchvotingsystem.config.PersistenceConfig;
 import com.z1max.lunchvotingsystem.model.Role;
 import com.z1max.lunchvotingsystem.model.User;
 import com.z1max.lunchvotingsystem.util.exception.UserNotFoundException;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
-
 
 import java.util.List;
 
 import static com.z1max.lunchvotingsystem.UserTestData.*;
 
-@ContextConfiguration(classes = {PersistenceConfig.class, AppConfig.class})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/insert-data.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class UserServiceTest {
 
-    private static final Logger log = LoggerFactory.getLogger("result");
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+public class UserServiceTest extends AbstractServiceTest {
 
     @Autowired
     UserService service;
