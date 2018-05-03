@@ -10,16 +10,21 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.z1max.lunchvotingsystem.controller")
-public class WebConfig {
-    
-    @Bean
-    public ObjectMapper objectMapper(){
+public class WebConfig implements WebMvcConfigurer {
+
+    public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
 
         objectMapper.registerModule(new Hibernate5Module());
@@ -32,5 +37,16 @@ public class WebConfig {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         return objectMapper;
+    }
+
+    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        messageConverter.setObjectMapper(objectMapper());
+        return messageConverter;
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(jackson2HttpMessageConverter());
     }
 }
