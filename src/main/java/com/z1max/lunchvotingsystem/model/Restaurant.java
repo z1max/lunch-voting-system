@@ -33,7 +33,9 @@ public class Restaurant extends AbstractNamedEntity {
 
     public void addDish(Dish dish){
         menu.add(dish);
-        dish.setRestaurant(this);
+        if (dish.getRestaurant() != this) {
+            dish.setRestaurant(this);
+        }
     }
 
     public void removeDish(Dish dish){
