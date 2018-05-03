@@ -17,9 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.z1max.lunchvotingsystem.controller")
 public class WebConfig {
-
-
-
+    
     @Bean
     public ObjectMapper objectMapper(){
         ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
