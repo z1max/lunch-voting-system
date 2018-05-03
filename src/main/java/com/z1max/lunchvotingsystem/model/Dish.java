@@ -1,26 +1,30 @@
 package com.z1max.lunchvotingsystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "dishes")
 public class Dish extends AbstractNamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Restaurant restaurant;
 
     @NotNull
-    @Size(min = 1)
+    @Range(min = 1)
     @Column(name = "price", nullable = false)
     private Long priceInCents;
 
     public Dish(){}
 
-    public Dish(Integer id, String name, @NotNull @Size(min = 1) Long priceInCents) {
+    public Dish(Integer id, String name, Long priceInCents) {
         super(id, name);
         this.priceInCents = priceInCents;
     }
