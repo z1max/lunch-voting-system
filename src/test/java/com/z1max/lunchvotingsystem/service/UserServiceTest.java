@@ -2,7 +2,7 @@ package com.z1max.lunchvotingsystem.service;
 
 import com.z1max.lunchvotingsystem.model.Role;
 import com.z1max.lunchvotingsystem.model.User;
-import com.z1max.lunchvotingsystem.util.exception.UserNotFoundException;
+import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +25,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void getWrongId(){
         int wrongId = 1;
-        thrown.expect(UserNotFoundException.class);
+        thrown.expect(EntityNotFoundException.class);
         thrown.expectMessage("Cannot find user with id = " + wrongId);
         service.get(wrongId);
     }
@@ -40,7 +40,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void getWrongEmail(){
         String wrongEmail = "wrong@gmail.com";
-        thrown.expect(UserNotFoundException.class);
+        thrown.expect(EntityNotFoundException.class);
         thrown.expectMessage("Cannot find user with email = " + wrongEmail);
         service.getByEmail(wrongEmail);
     }

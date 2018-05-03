@@ -2,7 +2,7 @@ package com.z1max.lunchvotingsystem.service;
 
 import com.z1max.lunchvotingsystem.model.User;
 import com.z1max.lunchvotingsystem.repository.UserRepository;
-import com.z1max.lunchvotingsystem.util.exception.UserNotFoundException;
+import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
 
     public User get(int id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Cannot find user with id = " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find user with id = " + id));
     }
 
     @Override
     public User getByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("Cannot find user with email = " + email));
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find user with email = " + email));
     }
 
     public List<User> getAll() {
