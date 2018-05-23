@@ -32,7 +32,7 @@ public class DishController {
 
     @GetMapping(value = "/{dishId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish get(@PathVariable int restaurantId, @PathVariable int dishId){
-        return dishService.getDishByRestaurant(restaurantId, dishId);
+        return dishService.getDishByRestaurant(dishId, restaurantId);
     }
 
     @DeleteMapping()
