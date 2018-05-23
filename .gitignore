@@ -1,5 +1,17 @@
+target/
+out/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
 .idea
-out
-target
+*.iws
 *.iml
-log
+*.ipr
