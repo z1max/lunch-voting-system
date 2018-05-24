@@ -71,12 +71,13 @@ public class User extends AbstractNamedEntity {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
+        final StringBuilder sb = new StringBuilder(getClass().getName());
+        sb.append("{id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", roles=").append(roles);
+        sb.append('}');
+        return sb.toString();
     }
 }
