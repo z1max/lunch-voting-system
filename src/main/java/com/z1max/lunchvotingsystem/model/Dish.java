@@ -1,5 +1,6 @@
 package com.z1max.lunchvotingsystem.model;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -11,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "dishes")
 public class Dish extends AbstractNamedEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
     @NotNull
@@ -43,5 +44,16 @@ public class Dish extends AbstractNamedEntity {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(getClass().getName());
+        sb.append("{id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", restaurant=").append(Hibernate.isInitialized(restaurant) ? restaurant.getId() : null);
+        sb.append(", priceInCents=").append(priceInCents);
+        sb.append('}');
+        return sb.toString();
     }
 }
