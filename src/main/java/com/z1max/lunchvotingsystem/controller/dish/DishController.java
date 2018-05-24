@@ -17,40 +17,40 @@ import static com.z1max.lunchvotingsystem.util.Util.checkNew;
 public class DishController {
     static final String REST_URL = "/api/restaurants/{restaurantId}/dishes";
 
-    private final DishService dishService;
+    private final DishService service;
 
     @Autowired
-    public DishController(DishService dishService) {
-        this.dishService = dishService;
+    public DishController(DishService service) {
+        this.service = service;
     }
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll(@PathVariable int restaurantId) {
-        return dishService.getAll(restaurantId);
+        return service.getAll(restaurantId);
     }
 
     @GetMapping(value = "/{dishId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish get(@PathVariable int restaurantId, @PathVariable int dishId){
-        return dishService.getDishByRestaurant(dishId, restaurantId);
+        return service.getDishByRestaurant(dishId, restaurantId);
     }
 
     @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAll(@PathVariable int restaurantId){
-        dishService.deleteAllByRestaurant(restaurantId);
+        service.deleteAllByRestaurant(restaurantId);
     }
 
     @DeleteMapping("/{dishId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int restaurantId, @PathVariable int dishId){
-        dishService.delete(dishId, restaurantId);
+        service.delete(dishId, restaurantId);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Dish create(@PathVariable int restaurantId, @RequestBody Dish dish){
         checkNew(dish);
-        return dishService.save(dish, restaurantId);
+        return service.save(dish, restaurantId);
     }
 
     @PutMapping(value = "/{dishId}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -58,6 +58,6 @@ public class DishController {
                        @PathVariable int dishId,
                        @RequestBody Dish dish) {
         assureIdConsistent(dish, dishId);
-        return dishService.save(dish, restaurantId);
+        return service.save(dish, restaurantId);
     }
 }
