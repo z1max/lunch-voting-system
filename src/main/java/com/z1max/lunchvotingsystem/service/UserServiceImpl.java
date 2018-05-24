@@ -12,39 +12,39 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepository repository;
 
     public User get(int id) {
-        return userRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find user with id = " + id));
     }
 
     @Override
     public User getByEmail(String email) {
-        return userRepository.findByEmail(email)
+        return repository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find user with email = " + email));
     }
 
     public List<User> getAll() {
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public User create(User user) {
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
     @Override
     public User update(User user) {
-        User updated = userRepository.findById(user.getId()).get();
+        User updated = repository.findById(user.getId()).get();
         updated.setEmail(user.getEmail());
         updated.setPassword(user.getPassword());
         updated.setName(user.getName());
         updated.setRoles(user.getRoles());
-        return userRepository.save(updated);
+        return repository.save(updated);
     }
 
     public void delete(int id) {
-        userRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
