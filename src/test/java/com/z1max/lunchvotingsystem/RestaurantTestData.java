@@ -21,27 +21,15 @@ public class RestaurantTestData {
     public static final Restaurant BURGER_KING = new Restaurant(BURGER_KING_ID, "Burger King",
             Arrays.asList(BIG_KING, FRENCH_FRIES));
 
-    public static void assertMatchIgnoreMenu(Restaurant actual, Restaurant expected){
-        assertThat(actual).isEqualToIgnoringGivenFields(expected,"menu");
+    public static void assertMatchIgnoreMenuAndVotes(Restaurant actual, Restaurant expected){
+        assertThat(actual).isEqualToIgnoringGivenFields(expected,"menu", "votes");
     }
 
-    public static void assertMatchIgnoreMenu(Iterable<Restaurant> actual, Iterable<Restaurant> expected){
-        assertThat(actual).usingElementComparatorIgnoringFields("menu").isEqualTo(expected);
+    public static void assertMatchIgnoreMenuAndVotes(Iterable<Restaurant> actual, Iterable<Restaurant> expected){
+        assertThat(actual).usingElementComparatorIgnoringFields("menu", "votes").isEqualTo(expected);
     }
 
-    public static void assertMatchIgnoreMenu(Iterable<Restaurant> actual, Restaurant... expected){
-        assertMatchIgnoreMenu(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Restaurant actual, Restaurant expected){
-        assertThat(actual).isEqualToComparingFieldByFieldRecursively(expected);
-    }
-
-    public static void assertMatch(Iterable<Restaurant> actual, Iterable<Restaurant> expected){
-        assertThat(actual).usingRecursiveFieldByFieldElementComparator().isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Restaurant> actual, Restaurant... expected){
-        assertMatch(actual, Arrays.asList(expected));
+    public static void assertMatchIgnoreMenuAndVotes(Iterable<Restaurant> actual, Restaurant... expected){
+        assertMatchIgnoreMenuAndVotes(actual, Arrays.asList(expected));
     }
 }

@@ -12,44 +12,49 @@ import java.util.List;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantRepository repository;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
+    public RestaurantServiceImpl(RestaurantRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Restaurant get(int id) {
-        return restaurantRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find restaurant with id = " + id));
     }
 
     @Override
     public List<Restaurant> getAll() {
-        return restaurantRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     @Transactional
     public Restaurant save(Restaurant restaurant) {
-        return restaurantRepository.save(restaurant);
+        return repository.save(restaurant);
     }
 
 
     @Override
     @Transactional
     public void delete(int id) {
-        restaurantRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public List<Restaurant> getAllWithMenu() {
-        return restaurantRepository.getAllWithMenu();
+        return repository.getAllWithMenu();
     }
 
     @Override
     public Restaurant getWithMenu(int id) {
-        return restaurantRepository.getWithMenu(id);
+        return repository.getWithMenu(id);
+    }
+
+    @Override
+    public Restaurant getWithVotes(int id) {
+        return repository.getWithVotes(id);
     }
 }

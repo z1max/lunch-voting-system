@@ -16,4 +16,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
 
     @Query("SELECT restaurant FROM Restaurant restaurant JOIN FETCH restaurant.menu WHERE restaurant.id = :id")
     Restaurant getWithMenu(@Param("id") int id);
+
+    @Query("SELECT restaurant FROM Restaurant restaurant JOIN FETCH restaurant.votes WHERE restaurant.id = :id")
+    Restaurant getWithVotes(@Param("id") int id);
 }

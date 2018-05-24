@@ -1,6 +1,5 @@
 package com.z1max.lunchvotingsystem.service;
 
-import com.z1max.lunchvotingsystem.model.Dish;
 import com.z1max.lunchvotingsystem.model.Restaurant;
 
 import java.util.List;
@@ -19,4 +18,5 @@ public interface RestaurantService {
 
     Restaurant getWithMenu(int id);
 
+    Restaurant getWithVotes(int id);
 }
