@@ -2,11 +2,14 @@ package com.z1max.lunchvotingsystem.service;
 
 import com.z1max.lunchvotingsystem.model.Restaurant;
 import com.z1max.lunchvotingsystem.repository.RestaurantRepository;
+import com.z1max.lunchvotingsystem.to.RestaurantWithVotes;
 import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,7 +57,24 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant getWithVotes(int id) {
-        return repository.getWithVotes(id);
+    public Restaurant getWithVotesByDate(int id, LocalDate date) {
+        return repository.getWithVotes(id, date);
+    }
+
+    @Override
+    public List<RestaurantWithVotes> getAllWithVotesByDate(LocalDate date) {
+        List<Restaurant> all = repository.findAll();
+        List<Restaurant> withVotes = repository.getAllWithVotesByDate(date);
+        List<RestaurantWithVotes> result = new ArrayList<>();
+
+        for (Restaurant restaurant : all){
+            int votes = 0;
+            int index;
+            if ((index = withVotes.indexOf(restaurant)) != -1){
+                votes = withVotes.get(index).getVotes().size();
+            }
+            result.add(new RestaurantWithVotes(restaurant.getId(), restaurant.getName(), votes));
+        }
+        return result;
     }
 }

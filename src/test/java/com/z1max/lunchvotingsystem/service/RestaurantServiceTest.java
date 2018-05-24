@@ -2,9 +2,11 @@ package com.z1max.lunchvotingsystem.service;
 
 import com.z1max.lunchvotingsystem.model.Dish;
 import com.z1max.lunchvotingsystem.model.Restaurant;
+import com.z1max.lunchvotingsystem.to.RestaurantWithVotes;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -89,11 +91,17 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void getWithVotes() {
-        Restaurant actual = service.getWithVotes(HARD_ROCK_CAFE_ID);
+        Restaurant actual = service.getWithVotesByDate(HARD_ROCK_CAFE_ID, LocalDate.of(2018, 5, 3));
         assertMatchIgnoreMenuAndVotes(actual, HARD_ROCK_CAFE);
 
         assertThat(actual.getVotes().get(0)).isEqualToComparingFieldByField(VOTE1);
         assertThat(actual.getVotes().get(1)).isEqualToComparingFieldByField(VOTE2);
+    }
+
+    @Test
+    public void getAllWithVotesByDate(){
+        List<RestaurantWithVotes> actual = service.getAllWithVotesByDate(LocalDate.of(2018, 5, 3));
+        actual.forEach(System.out::println);
     }
 
     private void assertMatchMenu(List<Dish> actualMenu, List<Dish> expectedMenu) {
