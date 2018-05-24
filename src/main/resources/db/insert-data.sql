@@ -27,7 +27,7 @@ INSERT INTO dishes(name, restaurant_id, price) VALUES
   ('Big King', 1004, 500),
   ('French Fries', 1004, 300);
 
-INSERT INTO votes(user_id, restaurant_id, date_time) VALUES
-  (1000, 1002, '2018-05-03 10:00:00'),
-  (1001, 1002, '2018-05-03 09:00:00');
+INSERT INTO votes(user_id, restaurant_id, date) VALUES
+  (1000, 1002, '2018-05-03'),
+  (1001, 1002, '2018-05-03');
 
