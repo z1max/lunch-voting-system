@@ -20,20 +20,20 @@ public class RestaurantController {
     static final String REST_URL = "/api/restaurants";
     private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
 
-    private final RestaurantService restaurantService;
+    private final RestaurantService service;
 
     @Autowired
-    public RestaurantController(RestaurantService restaurantService) {
-        this.restaurantService = restaurantService;
+    public RestaurantController(RestaurantService service) {
+        this.service = service;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll(@RequestParam(required = false, name = "withMenu") boolean withMenu) {
         logger.info("Get all, withMEnu = {}", withMenu);
         if (withMenu){
-            return restaurantService.getAllWithMenu();
+            return service.getAllWithMenu();
         } else {
-            return restaurantService.getAll();
+            return service.getAll();
         }
     }
 
@@ -42,9 +42,9 @@ public class RestaurantController {
                           @RequestParam(required = false, name = "withMenu") boolean withMenu) {
         logger.info("Get with id = {}, withMenu = {}", restaurantId, withMenu);
         if (withMenu){
-            return restaurantService.getWithMenu(restaurantId);
+            return service.getWithMenu(restaurantId);
         } else {
-            return restaurantService.get(restaurantId);
+            return service.get(restaurantId);
         }
     }
 
@@ -52,20 +52,20 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int restaurantId){
         logger.info("Delete id = {}", restaurantId);
-        restaurantService.delete(restaurantId);
+        service.delete(restaurantId);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant create(@RequestBody Restaurant restaurant){
         logger.info("Create {}", restaurant);
         checkNew(restaurant);
-        return restaurantService.save(restaurant);
+        return service.save(restaurant);
     }
 
     @PutMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant update(@RequestBody Restaurant restaurant, @PathVariable int restaurantId){
         logger.info("Update {} with id = {}", restaurant, restaurantId);
         assureIdConsistent(restaurant, restaurantId);
-        return restaurantService.save(restaurant);
+        return service.save(restaurant);
     }
 }
