@@ -1,9 +1,10 @@
-package com.z1max.lunchvotingsystem.service;
+package com.z1max.lunchvotingsystem.service.impl;
 
 import com.z1max.lunchvotingsystem.model.Dish;
 import com.z1max.lunchvotingsystem.model.Restaurant;
 import com.z1max.lunchvotingsystem.repository.DishRepository;
 import com.z1max.lunchvotingsystem.repository.RestaurantRepository;
+import com.z1max.lunchvotingsystem.service.DishService;
 import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class DishServiceImpl implements DishService{
+public class DishServiceImpl implements DishService {
 
     private final DishRepository dishRepository;
     private final RestaurantRepository restaurantRepository;
