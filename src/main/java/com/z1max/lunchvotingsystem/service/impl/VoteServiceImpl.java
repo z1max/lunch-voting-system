@@ -13,11 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 @Service
 public class VoteServiceImpl implements VoteService {
-
-    private final static LocalTime VOTING_END_TIME = LocalTime.of(11, 0, 0);
+    static ResourceBundle bundle = PropertyResourceBundle.getBundle("app");
+    private final static LocalTime VOTING_END_TIME = LocalTime.parse(bundle.getString("voting.end.time"));
 
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
