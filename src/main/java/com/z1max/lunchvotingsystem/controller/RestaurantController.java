@@ -1,4 +1,4 @@
-package com.z1max.lunchvotingsystem.controller.restaurant;
+package com.z1max.lunchvotingsystem.controller;
 
 import com.z1max.lunchvotingsystem.model.Restaurant;
 import com.z1max.lunchvotingsystem.service.RestaurantService;
@@ -29,7 +29,7 @@ public class RestaurantController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll(@RequestParam(required = false, name = "withMenu") boolean withMenu) {
-        logger.info("Get all, withMEnu = {}", withMenu);
+        logger.info("Get all, withMenu = {}", withMenu);
         if (withMenu){
             return service.getAllWithMenu();
         } else {
