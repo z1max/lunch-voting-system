@@ -1,7 +1,8 @@
-package com.z1max.lunchvotingsystem.service;
+package com.z1max.lunchvotingsystem.service.impl;
 
 import com.z1max.lunchvotingsystem.model.User;
 import com.z1max.lunchvotingsystem.repository.UserRepository;
+import com.z1max.lunchvotingsystem.service.UserService;
 import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

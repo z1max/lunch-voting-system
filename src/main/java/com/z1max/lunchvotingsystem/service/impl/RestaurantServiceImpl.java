@@ -1,7 +1,8 @@
-package com.z1max.lunchvotingsystem.service;
+package com.z1max.lunchvotingsystem.service.impl;
 
 import com.z1max.lunchvotingsystem.model.Restaurant;
 import com.z1max.lunchvotingsystem.repository.RestaurantRepository;
+import com.z1max.lunchvotingsystem.service.RestaurantService;
 import com.z1max.lunchvotingsystem.to.RestaurantWithVotes;
 import com.z1max.lunchvotingsystem.util.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
